@@ -14,9 +14,11 @@ public class SendMessageCommand implements Command {
 
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-        String messageText = request.getParameter("msg");
-        addMessage(messageText, user);
+        if ((boolean) request.getSession().getAttribute("isBanned")) {
+            User user = (User) request.getSession().getAttribute("user");
+            String messageText = request.getParameter("msg");
+            addMessage(messageText, user);
+        }
         return new ForwardResult(COMMAND_SHOW_CHAT_PAGE);
     }
 }
