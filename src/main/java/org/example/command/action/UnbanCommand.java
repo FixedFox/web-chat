@@ -13,8 +13,10 @@ import static org.example.data.DataBase.getUserByLogin;
 public class UnbanCommand implements Command {
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response) {
-        User user = getUserByLogin(request.getParameter("login"));
-        user.setBanned(false);
+        if ((boolean) request.getSession().getAttribute("isAdmin")) {
+            User user = getUserByLogin(request.getParameter("login"));
+            user.setBanned(false);
+        }
         return new ForwardResult(PAGE_USERS);
     }
 }
