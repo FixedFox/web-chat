@@ -43,7 +43,7 @@
                 <button class="button" type="submit" name="command" value="logout">Выйти</button>
             </form>
 
-            <c:if test="${isAdmin == true}">
+            <c:if  test="${isAdmin == true}">
             <form method="GET" action="/chat">
                 <button class="button" type="submit" name="command" value="show_user_page">Пользователи</button>
             </form>

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: fixedfox
-  Date: 19.02.2024
-  Time: 02:07
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -30,9 +23,16 @@
             <td><c:out value="${user.getLogin()}"/></td>
             <td><c:out value="${user.isOnline()}"/></td>
             <td>
-                <form method="post" action="/users">
-                    <input type="checkbox" name="ban" value="true" checked="${user.isBanned() == true}">
-                </form>
+                <c:if test="${user.isBanned() == true}">
+                    <form method="POST" action="/users?command=unban">
+                        <button name="login" value="${user.getLogin()}">UnBAN!</button>
+                    </form>
+                </c:if>
+                <c:if test="${user.isBanned() == false}">
+                    <form method="POST" action="/users?command=ban">
+                        <button name="login" value="${user.getLogin()}">BAN!</button>
+                    </form>
+                </c:if>
             </td>
         </tr>
     </c:forEach>

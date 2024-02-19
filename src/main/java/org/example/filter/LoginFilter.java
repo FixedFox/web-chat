@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.example.Resources.PAGE_LOGIN;
-public class LoginFilter implements Filter {
 
+public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
     }
@@ -20,7 +20,6 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         // Ваша релизация фильтра входа пользователя на сайт
-        System.out.println("Login Filtred");
         HttpSession session = ((HttpServletRequest) request).getSession();
 
         boolean isCommandLogin = request.getParameter("command") != null && request.getParameter("command").equals("login");

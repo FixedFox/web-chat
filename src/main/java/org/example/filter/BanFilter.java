@@ -1,25 +1,28 @@
 package org.example.filter;
 
-import org.example.data.User;
-
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static org.example.data.DataBase.getUserByLogin;
+import org.example.data.User;
 
 public class BanFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain filterChain) throws IOException, ServletException {
         HttpSession session = ((HttpServletRequest) servletRequest).getSession();
-        if (session.getAttribute("user") == null) {
-
-        } else {
+        if (session.getAttribute("user") != null) {
             boolean isBanned = ((User) session.getAttribute("user")).isBanned();
             session.setAttribute("isBanned", isBanned);
         }

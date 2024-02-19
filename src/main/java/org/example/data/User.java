@@ -33,6 +33,7 @@ public class User implements Comparable<User> {
     public UserType getUserType() {
         return userType;
     }
+
     public boolean isOnline() {
         return online;
     }
