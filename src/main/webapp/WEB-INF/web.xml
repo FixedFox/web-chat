@@ -27,6 +27,26 @@
         <filter-name>loginFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>banFilter</filter-name>
+        <filter-class>org.example.filter.BanFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>banFilter</filter-name>
+        <url-pattern>/chat</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>emptyCommandFilter</filter-name>
+        <filter-class>org.example.filter.EmptyCommandFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>emptyCommandFilter</filter-name>
+        <url-pattern>/chat</url-pattern>
+    </filter-mapping>
     <!-- Необходимо подключить LoginFilter и SessionListener -->
 
 </web-app>

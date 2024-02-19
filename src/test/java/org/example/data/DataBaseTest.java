@@ -18,39 +18,24 @@ class DataBaseTest {
     }
 
     @Test
-    void get_user_from_userBase_test() {
-        assertEquals(getUserById(0).getName(),
+    void get_user_from_userBase_and_getName_test() {
+        assertEquals(getUserByLogin("admin").getName(),
                 "ADMINUS");
+    }
+    @Test
+    void get_user_from_userBase_and_getUserType_test() {
+        assertTrue(getUserByLogin("admin").getUserType().equals(UserType.ADMIN));
     }
 
     @Test
     void message_add_and_get() {
-        addMessage("hello", getUserById(0));
-        addMessage("hello", getUserById(0));
-        addMessage("hello", getUserById(0));
+        addMessage("hello", getUserByLogin("admin"));
+        addMessage("hello", getUserByLogin("admin"));
+        addMessage("hello", getUserByLogin("admin"));
         assertEquals(showAllMessages().stream()
                         .map(Message::getValue)
                         .reduce((a, b) -> a + b)
                         .orElse("Empty"),
                 "hellohellohello");
-    }
-
-    @Test
-    void adding_sessionId_test() {
-        addSessionId(getUserById(0), "sessionName");
-        assertEquals(getUserById(0).getSessionId(), "sessionName");
-    }
-
-    @Test
-    void removing_sessionId_test() {
-        addSessionId(getUserById(0), "sessionName");
-        removeSessionId(getUserById(0));
-        assertEquals(getUserById(0).getSessionId(), "");
-    }
-
-    @Test
-    void existing_sessionId_test() {
-        addSessionId(getUserById(0), "id");
-        assertTrue(isSessionIdExist("id"));
     }
 }

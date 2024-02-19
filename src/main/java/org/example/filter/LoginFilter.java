@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.example.Resources.PAGE_LOGIN;
-import static org.example.data.DataBase.isSessionIdExist;
-
 public class LoginFilter implements Filter {
 
     @Override

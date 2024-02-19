@@ -2,6 +2,7 @@ package org.example.command.action;
 
 import org.example.command.Command;
 import org.example.data.DataBase;
+import org.example.data.UserType;
 import org.example.result.RedirectResult;
 import org.example.result.Result;
 
@@ -22,6 +23,9 @@ public class LoginCommand implements Command {
 
         if (checkPassword(login,password)) {
             request.getSession().setAttribute("user", getUserByLogin(login));
+            getUserByLogin(login).setOnline(true);
+            request.getSession().setAttribute("isAdmin", getUserByLogin(login).getUserType().equals(UserType.ADMIN));
+            request.getSession().setAttribute("isBanned", false);
             return new RedirectResult(COMMAND_SHOW_CHAT_PAGE);
 
         } else {

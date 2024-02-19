@@ -1,26 +1,21 @@
 package org.example.data;
 
-public class User {
+public class User implements Comparable<User> {
 
-    private final int userId;
+    private final Integer userId;
     private final String login;
     private final String password;
     private final String name;
     private final UserType userType;
     private boolean online = false;
-    private String sessionId;
+    private boolean isBanned = false;
 
-    public User(int userId,String login, String password, String name, UserType userType) {
+    public User(Integer userId, String login, String password, String name, UserType userType) {
         this.userId = userId;
         this.login = login;
         this.password = password;
         this.name = name;
         this.userType = userType;
-        this.sessionId = "";
-    }
-
-    public int getUserId() {
-        return userId;
     }
 
     public String getLogin() {
@@ -38,7 +33,6 @@ public class User {
     public UserType getUserType() {
         return userType;
     }
-
     public boolean isOnline() {
         return online;
     }
@@ -47,13 +41,16 @@ public class User {
         this.online = online;
     }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public boolean isBanned() {
+        return isBanned;
     }
-    public String getSessionId() {
-        return sessionId;
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
     }
-    public void clearSessionId() {
-        this.setSessionId("");
+
+    @Override
+    public int compareTo(User o) {
+        return userId.compareTo(o.userId);
     }
 }

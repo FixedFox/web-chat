@@ -42,9 +42,13 @@
             <form method="GET" action="/chat">
                 <button class="button" type="submit" name="command" value="logout">Выйти</button>
             </form>
+
+            <c:if test="${isAdmin == true}">
             <form method="GET" action="/chat">
-                <button class="button" type="submit" name="command" value="show_users_page">Пользователи</button>
+                <button class="button" type="submit" name="command" value="show_user_page">Пользователи</button>
             </form>
+            </c:if>
+
             <!-- Главная страница Чата -->
             <div>
             <c:forEach var="message" items="${messages}">
@@ -52,10 +56,12 @@
             </c:forEach>
             </div>
             <div>
+                <c:if test="${isBanned == false}">
                 <form method="POST" action="/chat">
                     <input type="text" name="msg" placeholder="Введитес сообщение" value="">
                     <button type="submit" name="command" value="send">Send</button>
                 </form>
+                </c:if>
             </div>
         </div>
     </body>
